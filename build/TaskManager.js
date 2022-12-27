@@ -1,6 +1,5 @@
 import { EventEmitter, UnavailabilityError } from 'expo-modules-core';
 import ExpoTaskManager from './ExpoTaskManager';
-console.log(`egm0121-TaskManager has been patched`);
 const tasks = new Map();
 function _validateTaskName(taskName) {
     if (!taskName || typeof taskName !== 'string') {
@@ -19,6 +18,7 @@ function _validateTaskName(taskName) {
  * @param taskExecutor A function that will be invoked when the task with given `taskName` is executed.
  */
 export function defineTask(taskName, taskExecutor) {
+    console.log(`egm0121-TaskManager has been patched`);
     if (!taskName || typeof taskName !== 'string') {
         console.warn(`TaskManager.defineTask: 'taskName' argument must be a non-empty string.`);
         return;
