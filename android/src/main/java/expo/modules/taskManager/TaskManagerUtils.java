@@ -199,14 +199,11 @@ public class TaskManagerUtils implements TaskManagerUtilsInterface {
   }
 
   private JobInfo createJobInfo(int jobId, ComponentName jobService, PersistableBundle extras) {
-    JobInfo.Builder jobBuilder = new JobInfo.Builder(jobId, jobService).setExtras(extras);
-    if (Build.VERSION.SDK_INT < 28) {
-      jobBuilder.setMinimumLatency(1).setOverrideDeadline(DEFAULT_OVERRIDE_DEADLINE);
-    } else {
-      // FIXME: This method was deprecated in API level 31. Use setExpedited(boolean) instead.
-      jobBuilder.setImportantWhileForeground(true);
-    }
-    return jobBuilder.build();
+    return new JobInfo.Builder(jobId, jobService)
+      .setExtras(extras)
+      .setMinimumLatency(0)
+      .setOverrideDeadline(DEFAULT_OVERRIDE_DEADLINE)
+      .build();
   }
 
   private JobInfo createJobInfo(Context context, TaskInterface task, int jobId, List<PersistableBundle> data) {
