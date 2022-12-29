@@ -202,10 +202,13 @@ public class TaskManagerUtils implements TaskManagerUtilsInterface {
     JobInfo.Builder jobBuilder = new JobInfo.Builder(jobId, jobService).setExtras(extras);
     if (Build.VERSION.SDK_INT < 28) {
       jobBuilder.setMinimumLatency(1).setOverrideDeadline(DEFAULT_OVERRIDE_DEADLINE);
-    } else {
-      // FIXME: This method was deprecated in API level 31. Use setExpedited(boolean) instead.
-      jobBuilder.setOverrideDeadline(DEFAULT_OVERRIDE_DEADLINE).setImportantWhileForeground(true);
+      return jobBuilder.build();
     }
+    if (Build.VERSION.SDK_INT < 31) {
+      jobBuilder.setOverrideDeadline(DEFAULT_OVERRIDE_DEADLINE).setImportantWhileForeground(true);
+      return jobBuilder.build();
+    }
+    jobBuilder.setOverrideDeadline(DEFAULT_OVERRIDE_DEADLINE).setExpedited(true);
     return jobBuilder.build();
   }
 
