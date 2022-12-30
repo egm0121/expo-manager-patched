@@ -208,7 +208,7 @@ public class TaskManagerUtils implements TaskManagerUtilsInterface {
       jobBuilder.setOverrideDeadline(DEFAULT_OVERRIDE_DEADLINE).setImportantWhileForeground(true);
       return jobBuilder.build();
     }
-    jobBuilder.setOverrideDeadline(DEFAULT_OVERRIDE_DEADLINE).setExpedited(true);
+    jobBuilder.setExpedited(true);
     return jobBuilder.build();
   }
 
